@@ -21,9 +21,44 @@ function openweatherFetchRequest(e){
 currentWeatheResponse=(data)=>{
   console.log(data); 
 }
-createCurrentWeatherCard=(city, img, date,temp,humidity,wind,uv)=>{
+createCurrentWeatherCard=(city,wx,img, unixdate,temp,humidity,wind,uv)=>{
+let date = moment().unix(unixdate);
+date = date.format('MMMM Do YYYY');
 let card =`
-
+<div class="card bg-white text-dark border border-success">
+  <div class="card-body">          
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item text-dark">
+        <h5 class="card-title float-left">${city}</h5>         
+      </li>
+      <li class="list-group-item text-dark">
+        <span class="d-inline-block float-left">
+        <p>Weather:</p> 
+        <p class="badge badge-success">
+        ${wx}
+        </p> 
+        </span>
+          <img class="w-25 float-right bg-primary" src="http://openweathermap.org/img/wn/${img}.png" alt="Card image cap">
+      </li>
+      <li class="list-group-item text-dark">
+        <h6 class="card-subtitle text-muted">Date: 
+          <span class="float-right">${date}</span>
+        </h6>
+      </li>
+      <li class="list-group-item text-dark">Temp: 
+        <span class="float-right">${temp} &#8457;</span>
+      </li>
+      <li class="list-group-item text-dark">Humidity: 
+        <span class="float-right">${humidity}%</span>
+      </li>
+      <li class="list-group-item text-dark">Wind: 
+        <span class="float-right">${wind} MPH
+        </span>
+      </li>
+      <li class="list-group-item text-dark">UV Index: <span class="badge badge-success float-right">${uv}</span></li>
+    </ul>
+  </div>
+</div>
 `;
 }
 localStorageHistory =(store_data)=>{
@@ -63,8 +98,38 @@ fetchForecast=(city)=>{
 parseForecastData=(data)=>{
   console.log(data.list);
 }
-createForecastWeatherCard=(date,)=>{
-
+createForecastWeatherCard=(unixdate,wx,img,temp,humidity,wind)=>{
+let date = moment().unix(unixdate);
+date = date.format('MMMM Do YYYY');
+let card = `
+  <div class="col-md-5 my-3">
+    <div class="card bg-white text-dark border border-success">
+        <div class="card-body">  
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item text-dark">
+              <h6 class="card-title float-left">${date}</h6>
+            </li>
+            <li class="list-group-item text-dark">
+              <span class="d-inline-block float-left">
+              <p>Weather:</p> 
+              <p class="badge badge-success">${wx}</p> 
+              </span>
+                <img class="w-25 float-right bg-primary" src="http://openweathermap.org/img/wn/${img}.png" alt="Card image cap">
+            </li>
+            <li class="list-group-item text-dark">Temp: 
+              <span class="float-right">${temp} &#8457;</span>
+            </li>
+            <li class="list-group-item text-dark">Humidity: 
+              <span class="float-right">${humidity}%</span>
+            </li>
+            <li class="list-group-item text-dark">Wind: 
+              <span class="float-right">${wind} MPH
+              </span>
+            </li>
+        </div>
+      </div>
+  </div>
+`;
 }
 loadLocalHistory();
 searchSubmit.addEventListener('click',openweatherFetchRequest);
