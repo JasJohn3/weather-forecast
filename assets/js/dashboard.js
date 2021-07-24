@@ -1,23 +1,24 @@
 let apiKey ='9c4fb1938de2911a2efa8d463ac83a48'
 let searchSubmit = document.getElementById('submit-search');
+// Current Weather
 // api.openweathermap.org/data/2.5/weather?q=Phoenix&units=imperial&appid=9c4fb1938de2911a2efa8d463ac83a48
-console.log(apiKey);
-console.log(searchSubmit);
+// 5 Day Forecast
+// https://api.openweathermap.org/data/2.5/forecast?q=phoenix&appid=9c4fb1938de2911a2efa8d463ac83a48&cnt=5&units=imperial
 function openweatherFetchRequest(e){
   e.preventDefault();
   let search = document.getElementById('search');
   let searchValue = search.value;
   localStorageHistory(searchValue);
   let fetchAPIURL = `https://api.openweathermap.org/data/2.5/weather?q=${searchValue}&units=imperial&appid=${apiKey}`
-  
+  fetchForecast(searchValue);
   fetch(fetchAPIURL)
   .then(response => response.json())
-  .then(data => { recipeResponse(data);
+  .then(data => { currentWeatheResponse(data);
    
   })
   .catch(err =>err);
 }
-recipeResponse=(data)=>{
+currentWeatheResponse=(data)=>{
   console.log(data); 
 }
 localStorageHistory =(store_data)=>{
@@ -31,15 +32,12 @@ localStorageHistory =(store_data)=>{
 createSearchHistoryEl=(localHistory)=>{
   let uniqueHistory = [...new Set(localHistory)];
   uniqueHistory.splice(10);
-  console.log(uniqueHistory);
   searchHistoryUL = document.getElementById('search-history');
   searchHistoryUL.innerHTML ='';
   uniqueHistory.forEach(item =>{
-    console.log(item);
     liEl = document.createElement('li');
     liEl.classList.add("list-group-item");
     liEl.classList.add('text-dark');
-    console.log(liEl)
     // liEl.className("list-group-item text-dark");
     liEl.textContent =item;
     searchHistoryUL.append(liEl);
@@ -49,5 +47,16 @@ loadLocalHistory=()=>{
   let localHistory =JSON.parse(localStorage.getItem('city'))||[];
   createSearchHistoryEl(localHistory);
 };
+fetchForecast=(city)=>{
+  fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&cnt=5&units=imperial`)
+  .then(response => response.json())
+  .then(data =>{
+    parseForecastData(data);
+  })
+  .catch(err => console.log(err));
+}
+parseForecastData=(data)=>{
+  console.log(data.list);
+}
 loadLocalHistory();
 searchSubmit.addEventListener('click',openweatherFetchRequest);

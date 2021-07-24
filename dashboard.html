@@ -48,7 +48,7 @@
           <h2 class="text-light">City Search</h2>
           <form class="form-inline my-5">
             <input type="text" class="form-control mr-2" placeholder="search" id="search">
-            <buttton class="btn btn-outline-success my-2" id="submit-search">Search</buttton>
+            <buttton class="btn btn-outline-success my-3" id="submit-search">Search</buttton>
           </form>
             <ul class="list-group list-group-flush" id="search-history">
             </ul>
@@ -57,22 +57,25 @@
           <div class="row">
             <div class="col">
               <h2>Current Weather</h2>
-              <div class="card bg-dark border border-success">
-                <img class="card-img-top w-25" src="http://openweathermap.org/img/wn/10d@2x.png" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">City</h5>
-                  <p class="card-subtitle">Date</p>
-                </div>
-                <div class="card-body">
+              <div class="card bg-white text-dark border border-success">
+                <div class="card-body"> 
+                  <img class="w-25 float-right" src="http://openweathermap.org/img/wn/10d.png" alt="Card image cap">
+                  
                   <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-dark">
+                      <h5 class="card-title">City</h5>
+                    </li>
+                    <li class="list-group-item text-dark">
+                      <h6 class="card-subtitle text-muted">Date</h6>
+                    </li>
                     <li class="list-group-item text-dark">Temp: 
-                      <span class="badge badge-success float-right">74.01 &#8457;</span>
+                      <span class="float-right">74.01 &#8457;</span>
                     </li>
                     <li class="list-group-item text-dark">Humidity: 
-                      <span class="badge badge-success float-right">45%</span>
+                      <span class="float-right">45%</span>
                     </li>
                     <li class="list-group-item text-dark">Wind: 
-                      <span class="badge badge-success float-right">6.67 MPH
+                      <span class="float-right">6.67 MPH
                       </span>
                     </li>
                     <li class="list-group-item text-dark">UV Index: <span class="badge badge-success float-right">0.47</span></li>
@@ -83,31 +86,42 @@
           </div>
           <div class="row">
             <div class="col">
-              <h2>5 Day Forecast</h2>
               <div class="row">
-                <div class="col-6 col-md-2">
-
-                </div>
-                <div class="col-6 col-md-2">
-
-                </div>
-                <div class="col-6 col-md-2">
-
-                </div>
-                <div class="col-6 col-md-2">
-                  
-                </div>
-                <div class="col-6 col-md-2">
-                  
+                <div class="col">
+                  <h2>5-Day Forecast</h2>
                 </div>
               </div>
+              <div class="row">
+
+                <div class="col-md-4 my-3">
+                  <div class="card bg-white text-dark border border-success">
+                    <div class="card-body">  
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item text-dark">
+                          <h6 class="card-title float-left">Date</h6>
+                          <img class="float-right" src="http://openweathermap.org/img/wn/10d.png" alt="Card image cap">
+                          <div class="clear-fix"></div>
+                        </li>
+                        <li class="list-group-item text-dark">Temp: 
+                          <span class="float-right">74.01 &#8457;</span>
+                        </li>
+                        <li class="list-group-item text-dark">Humidity: 
+                          <span class="float-right">45%</span>
+                        </li>
+                        <li class="list-group-item text-dark">Wind: 
+                          <span class="float-right">6.67 MPH
+                          </span>
+                        </li>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              </div>
             </div>
-            
           </div>
-          
         </div>
       </div>
-
     </div>
   </main>
 <footer>
@@ -116,6 +130,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="./assets/js/dashboard.js"></script>
 </body>
 </html>

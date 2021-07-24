@@ -3,8 +3,8 @@ body{
   padding: 0;
   box-sizing: border-box;
 }
-main{
-  height: 91vh;
+#hero{
+  height: 100vh;
 }
 #hero::before{
   background: url("./assets/images/bg.jpg") no-repeat;
