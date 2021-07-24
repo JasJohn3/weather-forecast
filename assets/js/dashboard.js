@@ -6,11 +6,8 @@ let searchSubmit = document.getElementById('submit-search');
 // https://api.openweathermap.org/data/2.5/forecast?q=phoenix&appid=9c4fb1938de2911a2efa8d463ac83a48&cnt=5&units=imperial
 function createCurrentWeatherCard(city,wx,img,unixdate,temp,humidity,wind){
   let date = moment.unix(unixdate).format('LL');
-  console.log(date);
   let cardContainer = document.getElementById('current-weather-wrapper');
-  console.log(cardContainer);
   cardContainer.innerHTML ='';
-  console.log(cardContainer);
   let card =`
   <h2>Current Weather</h2>
   <div class="card bg-white text-dark border border-success">
@@ -132,13 +129,38 @@ fetchForecast=(city)=>{
   .catch(err => console.log(err));
 }
 parseForecastData=(data)=>{
-  console.log(data.list);
+  let cardContainer = document.getElementById('forecast-card-wrapper');
+  cardContainer.innerHTML ='';
+  let dataArr =data.list;
+  dataArr.forEach(item =>{
+   let div= document.createElement('div');
+   div.classList.add('col-md-5');
+   div.classList.add('my-3');
+    //unixdate
+    let punixdate =item.dt;
+    console.log(punixdate);
+    // wx
+    let pwx = item.weather[0].description;
+    console.log(pwx);
+    // img
+    let pimg = item.weather[0].icon;
+    console.log(pimg);
+    //temp
+    let ptemp = item.main.temp;
+    console.log(ptemp);
+    //humidity
+    let phumidity =item.main.humidity;
+    console.log(phumidity);
+    //wind
+    let pwind = item.wind.speed;
+    console.log(pwind);
+    div.innerHTML = createForecastWeatherCard(punixdate,pwx,pimg,ptemp,phumidity,pwind);
+    cardContainer.append(div);
+  });
 }
-createForecastWeatherCard=(unixdate,wx,img,temp,humidity,wind)=>{
-let date = moment().unix(unixdate);
-date = date.format('MMMM Do YYYY');
+function createForecastWeatherCard(unixdate,wx,img,temp,humidity,wind){
+let date = moment.unix(unixdate).format('LL');
 let card = `
-  <div class="col-md-5 my-3">
     <div class="card bg-white text-dark border border-success">
         <div class="card-body">  
           <ul class="list-group list-group-flush">
@@ -164,8 +186,8 @@ let card = `
             </li>
         </div>
       </div>
-  </div>
 `;
+  return card;
 }
 loadLocalHistory();
 searchSubmit.addEventListener('click',openweatherFetchRequest);
