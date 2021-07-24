@@ -13,13 +13,18 @@ function openweatherFetchRequest(e){
   fetchForecast(searchValue);
   fetch(fetchAPIURL)
   .then(response => response.json())
-  .then(data => { currentWeatheResponse(data);
-   
+  .then(data => { 
+    currentWeatheResponse(data);
   })
   .catch(err =>err);
 }
 currentWeatheResponse=(data)=>{
   console.log(data); 
+}
+createCurrentWeatherCard=(city, img, date,temp,humidity,wind,uv)=>{
+let card =`
+
+`;
 }
 localStorageHistory =(store_data)=>{
   // Local Storage Steps
@@ -57,6 +62,9 @@ fetchForecast=(city)=>{
 }
 parseForecastData=(data)=>{
   console.log(data.list);
+}
+createForecastWeatherCard=(date,)=>{
+
 }
 loadLocalHistory();
 searchSubmit.addEventListener('click',openweatherFetchRequest);
