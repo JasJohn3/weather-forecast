@@ -64,34 +64,32 @@ function openweatherFetchRequest(e){
 parseCurrentWeather=(data)=>{
   //city
   let pcity =data.name;
-  console.log(pcity);
+
   // wx
   let pwx = data.weather[0].description;
-  console.log(pwx);
+
   // img
   let pimg = data.weather[0].icon;
-  console.log(pimg);
+
   //unixdate
   let punixdate =data.dt;
-  console.log(punixdate);
+
   //temp
   let ptemp = data.main.temp;
-  console.log(ptemp);
+
   //humidity
   let phumidity =data.main.humidity;
-  console.log(phumidity);
+
   //wind
   let pwind = data.wind.speed;
-  console.log(pwind);
+
   createCurrentWeatherCard(pcity,pwx,pimg,punixdate,ptemp,phumidity,pwind);
 }
 
 function container(city,wx,img,unixdate){
-  console.log(city);
-  console.log(wx);
-  console.log(img);
+
   let date = moment(unixdate).unix();
-  console.log(date);
+
 
 }
 localStorageHistory =(store_data)=>{
@@ -138,22 +136,16 @@ parseForecastData=(data)=>{
    div.classList.add('my-3');
     //unixdate
     let punixdate =item.dt;
-    console.log(punixdate);
     // wx
     let pwx = item.weather[0].description;
-    console.log(pwx);
     // img
     let pimg = item.weather[0].icon;
-    console.log(pimg);
     //temp
     let ptemp = item.main.temp;
-    console.log(ptemp);
     //humidity
     let phumidity =item.main.humidity;
-    console.log(phumidity);
     //wind
     let pwind = item.wind.speed;
-    console.log(pwind);
     div.innerHTML = createForecastWeatherCard(punixdate,pwx,pimg,ptemp,phumidity,pwind);
     cardContainer.append(div);
   });
