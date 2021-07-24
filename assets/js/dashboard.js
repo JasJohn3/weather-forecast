@@ -14,11 +14,11 @@ function openweatherFetchRequest(e){
   fetch(fetchAPIURL)
   .then(response => response.json())
   .then(data => { 
-    currentWeatheResponse(data);
+    parseCurrentWeather(data);
   })
   .catch(err =>err);
 }
-currentWeatheResponse=(data)=>{
+parseCurrentWeather=(data)=>{
   console.log(data); 
 }
 createCurrentWeatherCard=(city,wx,img, unixdate,temp,humidity,wind,uv)=>{
