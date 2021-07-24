@@ -4,6 +4,52 @@ let searchSubmit = document.getElementById('submit-search');
 // api.openweathermap.org/data/2.5/weather?q=Phoenix&units=imperial&appid=9c4fb1938de2911a2efa8d463ac83a48
 // 5 Day Forecast
 // https://api.openweathermap.org/data/2.5/forecast?q=phoenix&appid=9c4fb1938de2911a2efa8d463ac83a48&cnt=5&units=imperial
+function createCurrentWeatherCard(city,wx,img,unixdate,temp,humidity,wind){
+  let date = moment.unix(unixdate).format('LL');
+  console.log(date);
+  let cardContainer = document.getElementById('current-weather-wrapper');
+  console.log(cardContainer);
+  cardContainer.innerHTML ='';
+  console.log(cardContainer);
+  let card =`
+  <h2>Current Weather</h2>
+  <div class="card bg-white text-dark border border-success">
+    <div class="card-body">          
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item text-dark">
+          <h5 class="card-title float-left">${city}</h5>         
+        </li>
+        <li class="list-group-item text-dark">
+          <span class="d-inline-block float-left">
+          <p>Weather:</p> 
+          <p class="badge badge-success">
+          ${wx}
+          </p> 
+          </span>
+            <img class="w-25 float-right bg-primary" src="http://openweathermap.org/img/wn/${img}.png" alt="Card image cap">
+        </li>
+        <li class="list-group-item text-dark">
+          <h6 class="card-subtitle text-muted">Date: 
+            <span class="float-right">${date}</span>
+          </h6>
+        </li>
+        <li class="list-group-item text-dark">Temp: 
+          <span class="float-right">${temp} &#8457;</span>
+        </li>
+        <li class="list-group-item text-dark">Humidity: 
+          <span class="float-right">${humidity}%</span>
+        </li>
+        <li class="list-group-item text-dark">Wind: 
+          <span class="float-right">${wind} MPH
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  `;
+  cardContainer.innerHTML=card;
+  console.log(cardContainer);
+}
 function openweatherFetchRequest(e){
   e.preventDefault();
   let search = document.getElementById('search');
@@ -20,65 +66,36 @@ function openweatherFetchRequest(e){
 }
 parseCurrentWeather=(data)=>{
   //city
-  console.log(data.name);
+  let pcity =data.name;
+  console.log(pcity);
   // wx
-  console.log(data.weather.description);
+  let pwx = data.weather[0].description;
+  console.log(pwx);
   // img
-  console.log(data.weather.icon);
+  let pimg = data.weather[0].icon;
+  console.log(pimg);
   //unixdate
-  console.log(data.dt);
+  let punixdate =data.dt;
+  console.log(punixdate);
   //temp
-  console.log(data.main.temp);
+  let ptemp = data.main.temp;
+  console.log(ptemp);
   //humidity
-  console.log(data.main.humidity);
+  let phumidity =data.main.humidity;
+  console.log(phumidity);
   //wind
-  console.log(data.wind.speed);
+  let pwind = data.wind.speed;
+  console.log(pwind);
+  createCurrentWeatherCard(pcity,pwx,pimg,punixdate,ptemp,phumidity,pwind);
 }
-createCurrentWeatherCard=(city,wx,img, unixdate,temp,humidity,wind,uv)=>{
-let date = moment().unix(unixdate);
-date = date.format('MMMM Do YYYY');
-let cardContainer = document.getElementById('current-weather-wrapper');
-cardContainer.innerHTML ='';
-let card =`
-<h2>Current Weather</h2>
-<div class="card bg-white text-dark border border-success">
-  <div class="card-body">          
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item text-dark">
-        <h5 class="card-title float-left">${city}</h5>         
-      </li>
-      <li class="list-group-item text-dark">
-        <span class="d-inline-block float-left">
-        <p>Weather:</p> 
-        <p class="badge badge-success">
-        ${wx}
-        </p> 
-        </span>
-          <img class="w-25 float-right bg-primary" src="http://openweathermap.org/img/wn/${img}.png" alt="Card image cap">
-      </li>
-      <li class="list-group-item text-dark">
-        <h6 class="card-subtitle text-muted">Date: 
-          <span class="float-right">${date}</span>
-        </h6>
-      </li>
-      <li class="list-group-item text-dark">Temp: 
-        <span class="float-right">${temp} &#8457;</span>
-      </li>
-      <li class="list-group-item text-dark">Humidity: 
-        <span class="float-right">${humidity}%</span>
-      </li>
-      <li class="list-group-item text-dark">Wind: 
-        <span class="float-right">${wind} MPH
-        </span>
-      </li>
-    </ul>
-  </div>
-</div>
-`;
-cardContainer.innerHTML=card;
-{/* <li class="list-group-item text-dark">UV Index: 
-      <span class="badge badge-success float-right">${uv}</span>
-    </li> */}
+
+function container(city,wx,img,unixdate){
+  console.log(city);
+  console.log(wx);
+  console.log(img);
+  let date = moment(unixdate).unix();
+  console.log(date);
+
 }
 localStorageHistory =(store_data)=>{
   // Local Storage Steps
