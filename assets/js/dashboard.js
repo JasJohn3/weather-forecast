@@ -19,12 +19,28 @@ function openweatherFetchRequest(e){
   .catch(err =>err);
 }
 parseCurrentWeather=(data)=>{
-  console.log(data); 
+  //city
+  console.log(data.name);
+  // wx
+  console.log(data.weather.description);
+  // img
+  console.log(data.weather.icon);
+  //unixdate
+  console.log(data.dt);
+  //temp
+  console.log(data.main.temp);
+  //humidity
+  console.log(data.main.humidity);
+  //wind
+  console.log(data.wind.speed);
 }
 createCurrentWeatherCard=(city,wx,img, unixdate,temp,humidity,wind,uv)=>{
 let date = moment().unix(unixdate);
 date = date.format('MMMM Do YYYY');
+let cardContainer = document.getElementById('current-weather-wrapper');
+cardContainer.innerHTML ='';
 let card =`
+<h2>Current Weather</h2>
 <div class="card bg-white text-dark border border-success">
   <div class="card-body">          
     <ul class="list-group list-group-flush">
@@ -55,11 +71,14 @@ let card =`
         <span class="float-right">${wind} MPH
         </span>
       </li>
-      <li class="list-group-item text-dark">UV Index: <span class="badge badge-success float-right">${uv}</span></li>
     </ul>
   </div>
 </div>
 `;
+cardContainer.innerHTML=card;
+{/* <li class="list-group-item text-dark">UV Index: 
+      <span class="badge badge-success float-right">${uv}</span>
+    </li> */}
 }
 localStorageHistory =(store_data)=>{
   // Local Storage Steps
